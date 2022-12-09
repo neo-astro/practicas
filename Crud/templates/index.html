@@ -1,0 +1,116 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="shortcut icon" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fjlcatj.gob.mx%2Fcid-766%2Ffutura-icon-5-23-72-260304371.html&psig=AOvVaw300qEGTuwr5ffcgwQfxvvL&ust=1670706288840000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKjX64u47fsCFQAAAAAdAAAAABAD">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo&family=Exo+2:wght@700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="abstract-shape.png">
+    <link rel="stylesheet" href="styles.css">
+
+  <title>Home</title>
+
+  <style>
+    #sidebar {
+      width: 20%;
+      height: 100vh;
+      background: #343840;
+    }
+    .h100 {
+    height: 100%
+    }
+
+    .x-hidden
+    {
+    overflow-x: hidden;
+    }
+
+    .y-hidden
+    {
+    overflow-y: hidden;
+    }
+  </style>
+
+<script src={% static "js/main.js" %} defer="true"></script>
+</head>
+
+<body class="y-hidden x-hidden">
+  <div class="row">
+    <div class="d-flex  col-9">
+
+        <div id="sidebar">
+
+          <div class="p-2">
+            <a href="./" class="navbar-brand text-center fw-bold text-light w-100 p-4 ">
+              Administrador
+            </a>
+          </div>
+    
+          <div id="sidebar-accordion" class="accordion x-hidden">
+            <div class="list-group">
+              <a href="#dashboard-items" data-toggle="collapse" aria-expanded="false"
+                class="list-group-item list-group-item-action bg-dark text-light">
+                <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>Mantenimiento
+              </a>
+              <div id="dashboard-items" class="collapse" data-parent="#sidebar-accordion">
+                <a href="estudiante" class="list-group-item list-group-item-action bg-dark text-light fa fa-user pl-5">
+                    Estudiante
+                </a>
+                <a href="Profesor" class="list-group-item list-group-item-action bg-dark text-light fa fa-user  pl-5">
+                    Profesor
+                </a>
+                <a href="Persona" class="list-group-item list-group-item-action bg-dark text-light fa fa-user  pl-5">
+                    Persona
+                </a>
+              </div>
+              
+            </div>
+          </div>
+
+        </div>
+
+
+
+      {% block content %}
+
+      <div class="w-100 bg-dark"> hola</div>
+        <!-- <div class="bg-dark col container-fluid justify-content-center align-items-center ">
+          <div class="row justify-content-center align-item-center">
+              <img class="col-sm-8 mb-3 " src="https://mk0brandloomtrca7pl1.kinstacdn.com/wp-content/uploads/2020/05/web-design-company-in-India-web-development-company-in-india.jpg" alt="">
+          </div>
+        </div>   -->
+      {% endblock %}
+        
+    </div>
+    
+  </div>
+
+
+</body>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+  </script>
+
+<style> @import url('https://fonts.googleapis.com/css2?family=Archivo&family=Exo+2:wght@700&display=swap'); </style>
+</html>

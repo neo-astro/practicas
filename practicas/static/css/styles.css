@@ -1,0 +1,16 @@
+
+  .btn-status-success{
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    background-color: #4cff00
+  }
+  
+  
+  .btn-status-danger {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff0000
+  }
+
