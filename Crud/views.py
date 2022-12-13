@@ -11,3 +11,6 @@ def tasks(request):
 def Estudiante(request):
     return render(request, '_estudiante.html')
 
+def usuario(request):
+    return render(request, '_usuario.html')
+
