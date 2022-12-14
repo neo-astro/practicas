@@ -1,13 +1,18 @@
 
 
 {% extends "index.html" %}
+
+
 {% block contend %}
+
+
 <div class="row">
     <div class="colsm-12">
         <div class="card border">
             <div class="card-header">
                 <h3 class="text-center">Crear de Usuario</h3>
             </div>
+
             <div class="card-body">
                 <form action="estudiante">
                     <div class="form-group">
@@ -27,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <labe class="control-label">fecha de nacimiento</labe>
-                        <input type="text" class="form-control" placeholder="dd/mm/aa">
+                        <input type="date" class="form-control" placeholder="dd/mm/aa">
                         <span class="text danger"></span>
                     </div>
                     <div class="form-group">
@@ -35,18 +40,25 @@
                         <input type="text" class="form-control" placeholder="099898983">
                         <span class="text danger"></span>
                     </div>
+
                     <div class="form-group">
-                        <labe class="control-label"></labe>
-                        <input type="text" class="form-control">
+                        <labe class="control-label" >Tipo de Identificacion</labe>
+                        <select type="text"  name="elegir" class="form-control">
+                            <option value="1">Cedula</option>
+                            <option value="2">Pasaporte</option>
+                            <option value="3">Ruc</option>
+                        </select>
                         <span class="text danger"></span>
                     </div>
+
+
                     <div class="form-group">
-                        <labe class="control-label"></labe>
-                        <input type="text" class="form-control">
+                        <labe class="control-label" >numero de Identificacion</labe>
+                        <input type="text" placeholder="0xxxx..." class="form-control"> 
                         <span class="text danger"></span>
                     </div>
+
                     
-                    <div class="form-group">
                         
                     </div>
                 </form>
@@ -54,6 +66,101 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- contenido estudiante  -->
+
+
+
+
+<div class="d-flex flex-column align-items-stretch  bg-light" style="width: 480px;">
+    <div class="container-fluid mx-auto text-center bg-dark text-decoration-none text-light rounded-bottom mb-1">
+      <svg class="bi mt-1 me-2" width="40" height="40"><use xlink:href="#userPerfil"/></svg>
+      <p class="fs-5 mb-2 fw-semibold">Lista de Usuarios</p>
+    </div >
+  
+  
+  
+    <div class="list-group list-group-flush border-bottom  scrollarea">
+  
+      <!-- elementos usuario -->
+      <div href="#" class="list-group-item list-group-item-action py-3 rounded-bottom lh-tight" aria-current="true">
+        
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">Adrian Estevan Abril Pesantez</strong>
+          <!-- <small class="fw-bold"> Software</small> -->
+        </div>
+  
+        <div class="row">
+  
+          <div class="col-2 ms-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png" class="me-2" height="50px" width="50px" alt="">
+            <!-- <svg class="bi me-2" width="50" height="50"><use xlink:href="#user"/></svg> -->
+          </div>
+  
+          <div class="col-6">
+  
+            <div class="mt-1 d-flex" >
+              <div class="d-flex">
+                <img width="18px" height="18px" class="me-2" src="https://cdn-icons-png.flaticon.com/512/126/126509.png" alt="">
+                <div>0987571164</div>
+              </div>
+            </div>
+  
+            <div class="mt-1 d-flex">
+              <img width="18px" height="18px" class="me-2" src="https://cdn-icons-png.flaticon.com/512/4097/4097494.png" alt="">
+              <!-- <svg class="bi me-2" width="18" height="18"><use xlink:href="#location"/></svg> -->
+              <div class="d-flex">
+                <div>Ecuador</div>
+                /
+                <div>Guayas</div> 
+                /
+                <div>Milagro</div>
+              </div>
+              
+            </div>
+  
+          </div>
+  
+  
+          <div class="col text-end">
+  
+            <a class="me-1" id="DelUser" href="">
+              <img class="bi me-1 bg" src="https://cdn-icons-png.flaticon.com/512/2356/2356780.png" class="me-2" height="18px" width="18px" alt=""></a>
+            </a>
+  
+            <a class="me-1" href="">
+              <img class="bi me-1 bg" src="https://cdn-icons-png.flaticon.com/512/6208/6208458.png" class="me-2" height="18px" width="18px" alt=""></a>
+            </a>
+  
+            <a class="me-1  text-black" href="">
+              <svg class="bi me-1" width="18px" height="18px"><use xlink:href="#delete"/></svg>
+            </a>
+  
+  
+          </div>
+  
+          
+        </div>
+  
+  
+      </div>
+  
+  
+      
+      
+    </div>
+  </div>
+  
 
 
 {% endblock %}
