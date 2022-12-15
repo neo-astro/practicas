@@ -14,3 +14,17 @@
     background-color: #ff0000
   }
 
+.btn-circle {
+  font-size: 40px;
+  color: rgb(210, 210, 210);
+  background-color: #fff;
+  border: solid 0.5px rgb(220, 219, 219);
+  box-shadow: 0 10 10 rgb(0,0,0,0.1);
+}
+
+
+.btn-circle:hover {
+  color: rgb(0, 0, 0);
+  background-color: rgba(242, 239, 239, 0.795)
+
+}
