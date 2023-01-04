@@ -3,8 +3,8 @@
 
 {% block contend %}
 
-
-
+{% load widget_tweaks %}
+<link rel="stylesheet" href="../static/css/styles.css">
 
 
 
@@ -115,22 +115,22 @@
 
 
 
-<div class="b-example-divider" style="width:50px"></div>
+<div class="b-example-divider" style="width:80px"></div>
 
 
 
 <!-- barra opciones -->
 
-<div class="d-flex flex-column   bg-light" style="width: 200px;">
+<div class="d-flex flex-column   bg-light" style="width: 180px;">
 
   <div class="d-flex flex-column  h-100 ">
 
 
-    <button title="Nuevo Usuario" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    <button title="Nuevo Usuario" id="actModal" data-bs-toggle="modal" data-bs-target="#exampleModal"
       class="fw-bold d-flex mt-3   btn-circle  mx-auto " style="width: 70px ; height: 70px;">
 
-      <div class="d-flex  mx-auto flex-column w-100  h-100">
-        +
+      <div class="d-flex  justify-content-center flex-column w-100  h-100">
+        <div>+</div>
       </div>
 
     </button>
@@ -142,7 +142,6 @@
 
 </div>
 
-<div class="b-example-divider" style="width:80px"></div>
 
 
 
@@ -150,64 +149,133 @@
 
 
 
-
+<!-- librerias pais-stato-ciudad -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+
 <!-- modal crear usuario formulario -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+
+<div class="modal bd-example-modal-lg " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"  >
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-
-
-
-
         <div class="row">
           <div class="colsm-12">
             <div class="card border ">
-              <div class="card-header">
-                <h3 class="text-center ">Crear de Usuario</h3>
+              <div class="card-header bg-dark">
+                <h4 class="text-center text-light ">Crear de Usuario</h4>
               </div>
+              <!-- datos para el formulario -->
+              <div class="card-body d-flex align-content-around justify-content-around">
+                <!-- <form method="POST" class="row">
+                  
+                  {% csrf_token %}
+                  {% for field in form %}
 
-              <div class="card-body">
-                <form action="estudiante" class="row">
+
+                  <div class="form-group-sm fw-bold fs-6">
+                    <labe class="control-label ">{{ field.label_tag }}</labe>
+                    {{ field|add_class:"form-control " }}
+                    <span class="text-danger">{{ field.errors }}</span>
+                  </div>
+
+
+                  {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <input type="submit" class="btn btn-primary" value="Crear">
+                </form>  -->
+
+
+                  <!-- <div>
+                    {% for field in form %}
+                      <div>
+                        <label>{{ field.label_tag }}</label>
+                        <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}">
+                        <div class="text-danger">{{ field.errors }}</div>
+                      </div>
+                    {% endfor %}
+                  </div> -->
+                  <!-- <div>{{ field|add_class:"form-control" }}</div> -->
+
+
+
+
+
+                <form id="usuario_form" method="POST" class="row">
+                  {% csrf_token %}
 
                   <div class="col-6">
 
 
-                    <div class="form-group">
-                      <labe class="control-label">Nombres</labe>
-                      <input type="text" class="form-control" placeholder="Pepito Daniel">
-                      <span class="text danger"></span>
-                    </div>
-                    <div class="form-group ">
-                      <labe class="control-label">Apellido paterno</labe>
-                      <input class="form-control" type="text" placeholder="Cazares">
-                      <span class="text danger"></span>
-                    </div>
-                    <div class="form-group">
-                      <labe class="control-label">Apellido materno</labe>
-                      <input type="text" class="form-control" placeholder="Perez">
-                      <span class="text danger"></span>
+                    <div class="form-group campform {% if form.Nombre.errors %}has-error{% endif %}" >
+                      <labe class="control-label">{{form.Nombre.label_tag }}</labe>
+                      {{ form.Nombre|add_class:"form-control " }}
+                      <!-- <input type="text" id="Nombre" value="{{ form.Nombre.value }}" name="Nombre" class="form-control" placeholder="Pepito Daniel"> -->
+                      <span class="myerror">{{ form.Nombre.errors }}</span>
                     </div>
 
 
-
-                    <div class="form-group">
-                      <labe class="control-label">Fecha de nacimiento</labe>
-                      <input type="date" class="form-control" placeholder="dd/mm/aa">
-                      <span class="text danger"></span>
+                    <div class="form-group campform  {% if form.Apellido_P.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Apellido_P.label_tag }}</labe>
+                      {{ form.Apellido_P|add_class:"form-control " }}
+                      <span class="myerror">{{ form.Apellido_P.errors }}</span>
                     </div>
 
-                    <div class="form-group">
-                      <labe class="control-label">Telefono</labe>
-                      <input type="text" class="form-control" placeholder="099898983">
-                      <span class="text danger"></span>
+
+                    <div class="form-group campform {% if form.Apellido_M.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Apellido_M.label_tag }}</labe>
+                      {{ form.Apellido_M|add_class:"form-control " }}
+                      <span class="myerror">{{ form.Apellido_M.errors }}</span>
+                    </div>
+
+
+                    <div class="form-group campform {% if form.Fecha_Nac.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Fecha_Nac.label_tag }}</labe>
+                      <input type="date" id="Fecha_Nac" value="{{ form.Fecha_Nac.value }}" name="Fecha_Nac" class="form-control" placeholder="dd/mm/aa">
+
+                      <!-- {{ form.Fecha_Nac|add_class:"form-control " }} -->
+                      <span class="myerror">{{ form.Fecha_Nac.errors }}</span>
+
+                    </div>
+
+
+                    <div class="form-group campform {% if form.Telf_Celular.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Telf_Celular.label_tag }}</labe>
+                      {{ form.Telf_Celular|add_class:"form-control " }}
+                      <span class="myerror">{{ form.Telf_Celular.errors }}</span>
+
+
+
+                    </div>
+
+                    <div class="form-group campform {% if form.Usu_Django.errors %}has-error{% endif %}">
+
+                      <labe class="control-label">{{form.Usu_Django.label_tag }}</labe>
+                      {{ form.Usu_Django|add_class:"form-control " }}
+                      <span class="myerror">{{ form.Usu_Django.errors }}</span>
+
                     </div>
 
 
@@ -222,63 +290,49 @@
                   <div class="col-6">
 
 
-                    <div class="form-group">
+                    <div class="form-group campform {% if form.Pais.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Pais.label_tag }}</labe>
+                      {{ form.Pais|add_class:"form-control drop" }}
+                      <span class="myerror">{{ form.Pais.errors }}</span>
+                    </div>
 
-
-
-
-
-                      <label for="country" class="control-label">Pais</label>
-
-                      <select name="country" class="countries form-control" id="countryId">
-                        <option id="xd">Elige el pais</div>
-                      </select>
-
-                      <label for="country" class="control-label">Provincia</label>
-                      <select name="state" disabled class="states form-control" id="stateId">
-                        <option value="">Elige la Provincia</option>
-                      </select>
-
-                      <label for="country" class="control-label">Pais</label>
-                      <select name="city" disabled class="cities form-control" id="cityId">
-                        <option value="">Elige la ciudad</option>
-                      </select>
-
-
-
-
-
-
-
+                    <div class="form-group campform {% if form.Provincia.errors %} has-error {% endif %}">
+                      <labe class="control-label">{{form.Provincia.label_tag }}</labe>
+                      {{ form.Provincia|add_class:"form-control drop" }}
+                      <span class="myerror">{{ form.Provincia.errors }}</span>
                     </div>
 
 
-                    <div class="form-group">
-                      <labe class="control-label">Tipo de Identificacion</labe>
-                      <select type="text" name="elegir" class="form-control">
-
-                        <option value="1">Cedula</option>
-                        <option value="2">Pasaporte</option>
-                        <option value="3">Ruc</option>
-                      </select>
-                      <span class="text danger"></span>
+                    <div class="form-group campform {% if form.Ciudad.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.Ciudad.label_tag }}</labe>
+                      {{ form.Ciudad|add_class:"form-control drop" }}
+                      <span class="myerror">{{ form.Ciudad.errors }}</span>
                     </div>
 
 
-                    <div class="form-group">
-                      <labe class="control-label">numero de Identificacion</labe>
-                      <input type="text" placeholder="0xxxx..." class="form-control">
-                      <span class="text danger"></span>
+
+
+                    <div class="form-group campform {% if form.T_Identificacion.errors %}has-error{% endif %}">
+                      <labe class="control-label">{{form.T_Identificacion.label_tag }}</labe>
+                      {{ form.T_Identificacion|add_class:"form-control drop" }}
+                      <span class="myerror">{{ form.T_Identificacion.errors }}</span>
+                    </div>
+
+
+                    <div class="form-group campform {% if form.N_Identificacion.errors %}has-error{% endif %}" >
+                      <labe class="control-label">{{form.N_Identificacion.label_tag }}</labe>
+                      {{ form.N_Identificacion|add_class:"form-control " }}
+                      <span class="myerror">{{ form.N_Identificacion.errors }}</span>
                     </div>
 
 
                   </div>
 
 
+                <input type="submit" class="mx-auto btn btn-dark mt-2 w-50 fw-bold" value="Enviar">
 
+                </form>
               </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
@@ -286,29 +340,135 @@
 
 
     </div>
-    <div id="confirm" class="modal-footer">
-    </div>
+
+    <!-- <div id="confirm" class="modal-footer">
+
+    </div> -->
   </div>
 </div>
 </div>
+  
+  
 
 
 
 
 
 
+<script type="text/javascript">
+
+  var d = document
+  var select = document.getElementById('id_Pais');
+  var provincia = document.getElementById('id_Provincia')
+  var ciudad = document.getElementById('id_Ciudad')
+
+  // funciones
+  function CompleteDropdown(data,selectAllenar,campoName){
+    data.forEach(function(e){
+      selectAllenar.innerHTML +=  `<option value="${e[campoName]}">${e[campoName]}</option>`
+    })
+  }
+  
+  function ListenSelect(Objeto,ruta,selectAllenar,campoName){
+    Objeto.addEventListener('change',
+    function(){
+      var selectedOption = this.options[Objeto.selectedIndex];
+      fetch(ruta + `${selectedOption.value}/`)
+      .then((response) => response.json())
+      .then((data) => CompleteDropdown(data,selectAllenar,campoName));
+      // console.log(selectedOption.value + ': ' + selectedOption.text);
+
+    });
+  }
+
+  ListenSelect(select,'http://127.0.0.1:8000/provincia/',provincia,'Nomprov')
+  ListenSelect(provincia,'http://127.0.0.1:8000/ciudad/',ciudad,'Nomcant')
+
+    // Eliminamos la propiedad required de todos los campos de entrada
+  d.querySelectorAll('input').forEach(function(input) {
+  input.removeAttribute('required');
+  });
+  d.querySelectorAll('select').forEach(function(input) {
+    input.removeAttribute('required');
+  });
+  // d.getElementById('id_Pais').addEventListener('change',(e)=>{
+  //   console.log(e)
+  // })
 
 
 
+
+  // document.querySelectorAll('input').forEach(function(input){
+  //   input.addEventListener('change', function (this){
+  //     this.classList.remove("mystyle")
+  //   })
+  // })
+
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   $pais = document.getElementById("Pais")
+  //   $estado = document.getElementById("Provincia")
+  //   $ciudad = document.getElementById("Ciudad")
+  //   $selectPais = document.getElementById("countryId")
+  //   $selectEstado = document.getElementById("stateId")
+  //   $selectCiudad = document.getElementById("cityId")
+
+  //   setTimeout(() => {
+
+  //     $pais.innerHTML = "seleciona el pais"
+
+  //   }, 500)
+
+  //   $selectPais.addEventListener("change", () => {
+  //     $ciudad.innerHTML = 'Elige una ciudad'
+  //     $selectEstado.classList.add('progress-select')
+  //     setTimeout(() => { $estado.innerHTML = 'Elige una provincia' }, 1000)
+  //     setTimeout(() => { $selectEstado.classList.remove('progress-select') }, 1500)
+
+
+  //   })
+
+  //   $selectEstado.addEventListener("change", () => {
+  //     $ciudad.innerHTML = 'Elige una ciudad'
+  //     $selectCiudad.classList.remove('progress-select')
+  //     $selectCiudad.classList.add('progress-select')
+  //     setTimeout(() => {
+  //       $ciudad.innerHTML = 'Elige una ciudad'
+  //       $selectCiudad.classList.remove('progress-select')
+  //     }, 1000)
+  //   })
+
+
+
+
+
+  // })
+
+
+</script>
+
+
+
+
+{% if error %}
+<script type="text/javascript">
+  document.getElementById("actModal").click()
+</script>  
+{% endif %}
+
+{% if success %}
+  <div id="alertSuccess" class="alertSuccess  w-25 rounded text-center alert alert-success alert-dismissible fade show" role="alert">
+    {{ success }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <script type="text/javascript">
+    $alert = document.getElementById("alertSuccess")
+    setTimeout( ()=>{
+      $alert.parentNode.removeChild($alert)
+    }, 3000) 
+  </script>  
+{% endif %}
 
 
 
 {% endblock %}
 
-
-<script>
-  document.addEventListener("DOMContentLoaded",()=>{
-    document.getElementById("xd").innerHTML="seleciona el pais"
-  })
-  
-</script>

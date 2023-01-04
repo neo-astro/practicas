@@ -53,6 +53,9 @@
 }
 
 
+.roundered-8{
+  border-radius: 25%;
+}
 
 
 
@@ -113,3 +116,122 @@
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+
+.option{
+  width: 100px;
+  background: rgb(135, 55, 55);
+}
+
+.progress-select{
+  animation: change  1.5s  linear
+}
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+@keyframes esfumar{
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes change{
+  0% {
+    width: 0%;
+    background-color: #f9f9f9;
+    color:  #f9f9f9;
+  }
+
+  10%{
+    width: 10%;
+    background-color: #ffffff;
+    color:  #ffffff;
+  }
+  20% {
+    width: 20%;
+    background-color: #f9f9f9;
+    color:  #f9f9f9;
+  }
+
+
+
+  30%{
+    width: 30%;
+    background-color: #ffffff;
+    color:  #ffffff;
+  }
+  40% {
+    width: 40%;
+    background-color: #f9f9f9;
+    color:  #f9f9f9;
+  }
+
+  50%{
+    width: 50%;
+    background-color: #ffffff;
+    color:  #ffffff;
+  }
+  60% {
+    width: 60%;
+    background-color: #f9f9f9;
+    color:  #f9f9f9;
+  }
+
+
+  100% {
+    background-color: #ffffff;
+    width: 100%
+  }
+}
+
+.myerror {
+  font-size: 11.5px;
+  font-weight:600;
+  color:#f02121;
+}
+
+.campform{
+  min-height:100px;
+}
+
+.campform input{
+  margin-top: 2px;
+  width: 225px!important;
+}
+
+
+.drop {
+  width: 225px;
+
+}
+
+.has-error input{
+  border-color: red;
+}
+
+.alertSuccess{
+  margin-top: 4px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 50px;
+  z-index: 999;
+  animation: esfumar 3s linear ;}
