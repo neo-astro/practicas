@@ -21,13 +21,13 @@ def Estudiante(request):
 # usuariosForm = modelform_factory(usuarios,exclude=[])
 # Tpi = modelform_factory(tpi,exclude=[])
 
-def ApiProvincia(request, nombre_pais):
+def ApiProvincia(reques,nombre_pais):
   data = provincia.objects.filter(Nompai=nombre_pais)
   lista = json.dumps(list(data.values()))
   return HttpResponse(lista,content_type='application/json')
   
 
-def ApiCiudad(request, nombre_provincia):
+def ApiCiudad(reques,nombre_provincia):
   data = ciudad.objects.filter(Nomprov=nombre_provincia)
   lista = json.dumps(list(data.values()))
   return HttpResponse(lista,content_type='application/json')
@@ -39,13 +39,34 @@ def usuario(request):
       formUsuario.save()
       form = usuariosForm()
       success='!Usuario creado con Exito!'
-      return render(request, '_usuario.html',{'success':success,'form':form})
+      listaUsuarios = usuarios.objects.all()
+      return render(request, '_usuario.html',{'success':success,'form':form,'usuarios':listaUsuarios})
 
       # return redirect('index')
     else: 
+      # form.cleaned_data['Provincia']
+
       error ="error"
       form = usuariosForm(request.POST)
-      return render(request, '_usuario.html',{'form':form,'error':error})
-  form = usuariosForm()
-  return render(request, '_usuario.html',{'form':form})
+      form.fields['Provincia'].initial =request.POST.get('Provincia')
+      form.fields['Ciudad'].initial = request.POST.get('Ciudad')
 
+
+      listaUsuarios = usuarios.objects.all()
+      return render(request, '_usuario.html',{'form':form,'error':error,'usuarios':listaUsuarios})
+  form = usuariosForm()
+  listaUsuarios = usuarios.objects.all()
+  return render(request, '_usuario.html',{'form':form,'usuarios':listaUsuarios})
+
+
+
+def updateUser(request, N_Identificacion):
+  usuario = usuarios.objects.get(N_Identificacion=N_Identificacion)
+  usuario.delete()
+  return redirect('usuario')
+
+
+def deleteUser(request, N_Identificacion):
+  usuario = usuarios.objects.get(N_Identificacion=N_Identificacion)
+  usuario.delete()
+  return redirect('usuario')

@@ -29,18 +29,17 @@
   <div class="list-group list-group-flush border-bottom  scrollarea">
 
     <!-- elementos usuario -->
+    {% for usuario in usuarios %}
     <div href="#" class="list-group-item list-group-item-action py-3 rounded-bottom lh-tight" aria-current="true">
 
       <div class="d-flex w-100 align-items-center justify-content-between">
-        <strong class="mb-1">Adrian Estevan Abril Pesantez</strong>
+        <strong class="mb-1">{{usuario.Nombre}} {{usuario.Apellido_P}} {{usuario.Apellido_M}}</strong>
         <!-- <small class="fw-bold"> Software</small> -->
       </div>
 
       <div class="row">
 
-        <!-- <div class="col-2 ms-3">
-            <img src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png" class="me-2" height="30px" width="30px" alt="">
-          </div> -->
+
 
         <div class="col-6">
 
@@ -52,7 +51,7 @@
               <div class="d-flex">
                 <img width="18px" height="18px" class="me-2" src="https://cdn-icons-png.flaticon.com/512/126/126509.png"
                   alt="">
-                <div>0987571164</div>
+                <div>{{usuario.Telf_Celular}}</div>
               </div>
             </div>
 
@@ -61,11 +60,11 @@
                 alt="">
               <!-- <svg class="bi me-2" width="18" height="18"><use xlink:href="#location"/></svg> -->
               <div class="d-flex">
-                <div>Ecuador</div>
+                <div>{{usuario.Pais}}</div>
                 /
-                <div>Guayas</div>
+                <div>{{usuario.Provincia}}</div>
                 /
-                <div>Milagro</div>
+                <div>{{usuario.Ciudad}}</div>
               </div>
 
             </div>
@@ -86,7 +85,7 @@
               height="18px" width="18px" alt=""></a>
           </a>
 
-          <a class="me-1  text-black" id="delUser" href="">
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal1" class="me-1  text-black" id="delUser" onclick="del(this)" href="/usuario/eliminar/{{usuario.N_Identificacion}}/">
             <svg class="bi me-1" width="18px" height="18px">
               <use xlink:href="#delete" />
             </svg>
@@ -100,8 +99,9 @@
 
 
     </div>
+    {% endfor %}
 
-
+    
 
 
   </div>
@@ -162,13 +162,14 @@
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
 
-        <div class="row">
+      <div class="row">
           <div class="colsm-12">
             <div class="card border ">
               <div class="card-header bg-dark">
-                <h4 class="text-center text-light ">Crear de Usuario</h4>
+                <h4 class="text-center text-light ">Registrar nuevo Usuario</h4>
               </div>
               <!-- datos para el formulario -->
               <div class="card-body d-flex align-content-around justify-content-around">
@@ -298,6 +299,12 @@
 
                     <div class="form-group campform {% if form.Provincia.errors %} has-error {% endif %}">
                       <labe class="control-label">{{form.Provincia.label_tag }}</labe>
+                      <!-- <select name="Provincia" label="Provincia" id="id_Provincia" class="form-control drop">
+                        <option value="" selected disabled>Seleciona la provincia</option>
+                        {{ form.field.Provincia}}
+                      </select> -->
+
+
                       {{ form.Provincia|add_class:"form-control drop" }}
                       <span class="myerror">{{ form.Provincia.errors }}</span>
                     </div>
@@ -305,6 +312,12 @@
 
                     <div class="form-group campform {% if form.Ciudad.errors %}has-error{% endif %}">
                       <labe class="control-label">{{form.Ciudad.label_tag }}</labe>
+                      <!-- <select name="Ciudad" label="Ciudad" id="id_Ciudad" class="form-control drop">
+                        <option value="" selected disabled>Seleciona la provincia</option>
+                        {{ form.field.Ciudad}}
+                      </select> -->
+
+
                       {{ form.Ciudad|add_class:"form-control drop" }}
                       <span class="myerror">{{ form.Ciudad.errors }}</span>
                     </div>
@@ -339,18 +352,33 @@
 
 
 
+      </div>
+
+
+    
+    
+
     </div>
-
-    <!-- <div id="confirm" class="modal-footer">
-
-    </div> -->
   </div>
 </div>
+  
+  
+
+<div class="modal " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        Esta a punto de Eliminar este Usuario,
+        Desea continuar?
+      </div>
+      <div id="confirm" class="modal-footer">
+      </div>
+    </div>
+  </div>
 </div>
-  
-  
-
-
 
 
 
@@ -363,26 +391,27 @@
   var ciudad = document.getElementById('id_Ciudad')
 
   // funciones
-  function CompleteDropdown(data,selectAllenar,campoName){
+  function CompleteDropdown(data,selectAllenar,campoName,nombreLabel){
+    selectAllenar.innerHTML = `<option value="" selected disabled>${nombreLabel}</option>`
     data.forEach(function(e){
+
       selectAllenar.innerHTML +=  `<option value="${e[campoName]}">${e[campoName]}</option>`
     })
   }
-  
-  function ListenSelect(Objeto,ruta,selectAllenar,campoName){
+  function ListenSelect(Objeto,ruta,selectAllenar,campoName,nombreLabel){
     Objeto.addEventListener('change',
     function(){
       var selectedOption = this.options[Objeto.selectedIndex];
       fetch(ruta + `${selectedOption.value}/`)
       .then((response) => response.json())
-      .then((data) => CompleteDropdown(data,selectAllenar,campoName));
+      .then((data) => CompleteDropdown(data,selectAllenar,campoName,nombreLabel));
       // console.log(selectedOption.value + ': ' + selectedOption.text);
 
     });
   }
 
-  ListenSelect(select,'http://127.0.0.1:8000/provincia/',provincia,'Nomprov')
-  ListenSelect(provincia,'http://127.0.0.1:8000/ciudad/',ciudad,'Nomcant')
+  ListenSelect(select,'http://127.0.0.1:8000/provincia/',provincia,'Nomprov','Selecciones la Provincia')
+  ListenSelect(provincia,'http://127.0.0.1:8000/ciudad/',ciudad,'Nomcant','Seleccione la Ciudad')
 
     // Eliminamos la propiedad required de todos los campos de entrada
   d.querySelectorAll('input').forEach(function(input) {
@@ -395,6 +424,9 @@
   //   console.log(e)
   // })
 
+  function del(e) {
+    document.getElementById('confirm').innerHTML = `<a  class="btn btn-danger" href='${e.href}'>Eliminar</a >`
+  }
 
 
 
