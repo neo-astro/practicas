@@ -240,7 +240,7 @@
 
                     <div class="form-group campform  {% if form.Apellido_P.errors %}has-error{% endif %}">
                       <labe class="control-label">{{form.Apellido_P.label_tag }}</labe>
-                      {{ form.Apellido_P|add_class:"form-control " }}
+                      {{ form.Apellido_P|add_class:"form-control" }}
                       <span class="myerror">{{ form.Apellido_P.errors }}</span>
                     </div>
 
@@ -410,7 +410,7 @@
     });
   }
 
-  ListenSelect(select,'http://127.0.0.1:8000/provincia/',provincia,'Nomprov','Selecciones la Provincia')
+  ListenSelect(select,'http://127.0.0.1:8000/provincia/',provincia,'Nomprov','Seleccione la Provincia')
   ListenSelect(provincia,'http://127.0.0.1:8000/ciudad/',ciudad,'Nomcant','Seleccione la Ciudad')
 
     // Eliminamos la propiedad required de todos los campos de entrada
@@ -484,6 +484,17 @@
 {% if error %}
 <script type="text/javascript">
   document.getElementById("actModal").click()
+
+  const inputs = document.querySelectorAll("input");
+
+  // Agrega un evento de "cambio" a cada uno de los campos de entrada
+  inputs.forEach(input => {
+    input.addEventListener("change", function() {
+      // Elimina la clase que agrega el borde rojo
+      this.parentElement.classList.remove("has-error");
+      this.nextElementSibling.style.display= "none";
+    });
+  });
 </script>  
 {% endif %}
 

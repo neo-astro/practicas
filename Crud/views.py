@@ -48,8 +48,32 @@ def usuario(request):
 
       error ="error"
       form = usuariosForm(request.POST)
-      form.fields['Provincia'].initial =request.POST.get('Provincia')
-      form.fields['Ciudad'].initial = request.POST.get('Ciudad')
+      pais_pk = form['Pais'].data
+      provincia_pk = form['Provincia'].data
+      ciudad_pk = form['Ciudad'].data
+
+      #si fuese un objeto del select o dropdow a pais_pk(que solo es un string en este caso) cuando no lo es debo poner .pk al final
+      if pais_pk and provincia_pk ==None:
+        form.fields['Provincia'].queryset = provincia.objects.filter(Nompai=pais_pk)
+
+      if provincia_pk:
+        provincia_seleccionada = provincia.objects.get(pk=provincia_pk)
+        form.fields['Provincia'].queryset = provincia.objects.filter(pk=provincia_seleccionada.pk)
+
+      if provincia and ciudad_pk==None:
+        # ciudad_selecionada = ciudad.objects.get(pk=ciudad_pk)
+        form.fields['Ciudad'].queryset = ciudad.objects.filter(Nomprov=provincia_pk)
+
+      if ciudad_pk:
+        ciudad_selecionada = ciudad.objects.get(pk=ciudad_pk)
+        form.fields['Ciudad'].queryset = ciudad.objects.filter(pk=ciudad_selecionada.pk)
+
+      # Actualizamos el queryset del campo Provincia con el valor seleccionado
+
+      print(provincia_pk)
+
+      # form.fields['Provincia'].initial =request.POST.get('Provincia')
+      # form.fields['Ciudad'].initial = request.POST.get('Ciudad')
 
 
       listaUsuarios = usuarios.objects.all()

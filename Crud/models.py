@@ -94,13 +94,9 @@ class usuariosForm(forms.ModelForm):
   Usu_Django       = forms.CharField(max_length=50,                           label='Nombre de Usuario',required=True ,validators=[RegexValidator(r'^[a-zA-Z0-9]*$','No debe tener espacios'),], error_messages={'required': 'Este campo es requerido'})
   N_Identificacion = forms.CharField(max_length=13,                           label='Numero de Identificacion',required=True ,error_messages={'invalid': 'Compruebe su identificacion.','required': 'Este campo es requerido'},validators=[RegexValidator(r'^\d{10,13}$','Comprube el numero por favor')] )
   T_Identificacion = forms.ModelChoiceField(queryset=tpi.objects.all(),       label='Tipo de Identificacion',required=True ,error_messages={'required': 'Selecciona el tipo de identificaion.',},empty_label="Tipo de identificacion" ) 
-#   Pais             = forms.ModelChoiceField(queryset=pais.objects.all(),      required=True ,empty_label="Seleccione el país",  error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'}   ,       )    
-#   Provincia        = forms.CharField(max_length=13,  required=True ,error_messages={'required': 'Compruebe su identificaion.','required': 'Este campo es requerido'}      )
-#   Ciudad           = forms.CharField(max_length=13,  required=True ,         error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'} )
-  
-  Pais             = forms.ModelChoiceField(queryset=pais.objects.all(),      required=True ,empty_label="Seleccione el país",  error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'}   ,       )    
-  Provincia        = forms.ModelChoiceField(queryset=provincia.objects.none(), required=True ,empty_label="Seleccione la provincia",error_messages={'required': 'Compruebe su identificaion.','required': 'Este campo es requerido'},       )
-  Ciudad           = forms.ModelChoiceField(queryset=ciudad.objects.none(),    required=True ,empty_label="Seleccione la ciudad",         error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'}, )
+  Pais             = forms.ModelChoiceField(queryset=pais.objects.all(),      required=True ,empty_label="Seleccione el País",  error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'}   ,       )    
+  Provincia        = forms.ModelChoiceField(queryset=provincia.objects.none(), required=True ,empty_label="Seleccione la Provincia",error_messages={'required': 'Compruebe su identificaion.','required': 'Este campo es requerido'},       )
+  Ciudad           = forms.ModelChoiceField(queryset=ciudad.objects.none(),    required=True ,empty_label="Seleccione la Ciudad",         error_messages={'required': 'Selecciona el tipo de identificaion.','required': 'Este campo es requerido'}, )
   
   class Meta:
     model = usuarios
